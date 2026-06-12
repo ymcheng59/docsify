@@ -137,6 +137,12 @@ body {
 .btn-primary { background: var(--purple); color: #fff; }
 .btn-accent { background: var(--pink); color: #fff; }
 
+.slots-wrap { margin-top: 12px; }
+.slots-hint { font-size: 0.78rem; color: #b58aa5; }
+.slots { display: flex; gap: 8px; margin-top: 6px; }
+.slot { flex: 1; padding: 10px 8px; font-size: 0.88rem; }
+.slot.has { background: var(--pink-soft); color: var(--text); }
+
 .footer {
   text-align: center;
   margin-top: 22px;
