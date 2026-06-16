@@ -1,8 +1,30 @@
-# ✨ 梦幻换装屋
+# ✨ 我的换装屋
 
-一个纯前端的换装小游戏，使用 HTML + CSS + 内联 SVG 制作，**无需任何依赖或构建工具**，直接用浏览器打开 `index.html` 即可游玩。
+一个纯前端的换装小游戏，**无需任何依赖或构建工具**，直接用浏览器打开 `index.html` 即可游玩。
 
-## 玩法
+包含两种模式：
+
+| 模式 | 入口 | 说明 |
+| --- | --- | --- |
+| **造型相册版（默认）** | `index.html` | 用你自己的整身立绘图片当角色，点击切换不同造型 |
+| **手绘 SVG 换装版** | `doll.html` | 纯 SVG 小人，自由搭配发型/服装/配饰/表情/背景 |
+
+## 造型相册版（用你自己的图）
+
+1. 把整身立绘图片放进 `assets/` 目录：
+   - 默认形象：`base.png`
+   - 其它造型：`look-1.png`、`look-2.png` …（最多 `look-20`，支持 `.png/.jpg/.webp`）
+   - 建议同一角色、同样画布与站位，只换服装。
+2. 打开 `index.html` 即可点击切换、随机、保存当前图片。
+3. 想自定义名字/顺序，可在 `assets/` 放 `looks.json`（格式见 `assets/README.txt`）。
+
+> 提示：上传到 `main` 分支后，GitHub Pages 会自动重新部署，刷新即可看到。
+
+---
+
+## 手绘 SVG 换装版（`doll.html`）
+
+### 玩法
 
 - 在右侧面板切换 **发型 / 上装 / 下装 / 鞋子 / 配饰 / 背景** 等分类
 - 点击款式更换造型，点击色块更换颜色
@@ -44,8 +66,11 @@ python3 -m http.server 8000
 
 ```
 dress-up-game/
-├── index.html   # 页面结构与角色 SVG 骨架
-├── style.css    # 样式
-├── game.js      # 素材定义与游戏逻辑
+├── index.html    # 造型相册版页面
+├── gallery.js    # 相册版逻辑(读取 assets/ 图片)
+├── doll.html     # 手绘 SVG 换装版页面
+├── game.js       # SVG 版素材与逻辑
+├── style.css     # 共用样式
+├── assets/       # 放你的立绘图片(base.png / look-*.png / looks.json)
 └── README.md
 ```
