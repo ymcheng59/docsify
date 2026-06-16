@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的换装屋 ✨</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>✨ 我的换装屋 ✨</h1>
+      <p class="subtitle">专属你的卡通形象 · 挑选今天的造型吧！</p>
+    </header>
+
+    <main class="stage-wrap gallery-wrap">
+      <!-- 立绘舞台 -->
+      <section class="stage gallery-stage" id="stage">
+        <img id="look" class="look-img" alt="当前造型" />
+        <div id="placeholder" class="placeholder" hidden>
+          <div class="ph-emoji">🖼️</div>
+          <p>还没有找到立绘图片</p>
+          <p class="ph-sub">把图片上传到仓库的<br><code>dress-up-game/assets/</code> 目录即可自动显示</p>
+        </div>
+        <div id="loadingTip" class="placeholder"><div class="ph-emoji">⏳</div><p>正在加载造型…</p></div>
+      </section>
+
+      <!-- 造型选择 -->
+      <section class="panel">
+        <h3 class="panel-title">选择造型</h3>
+        <div class="looks" id="looks"></div>
+
+        <div class="actions">
+          <button id="randomBtn" class="btn btn-accent">🎲 随机</button>
+          <button id="saveBtn" class="btn btn-primary">📷 保存当前图片</button>
+        </div>
+
+        <p class="add-tip">想加新造型？把整身立绘图(同一角色不同服装)上传到
+          <code>dress-up-game/assets/</code>，命名 <code>look-1.png</code>、<code>look-2.png</code>…即可。</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="charinfo">
+        🌸 <b>自定义</b> · 18岁 · 165cm · 温柔 / 文静 / 善良 · 热爱花草和阳光,偶尔有点小迷糊
+      </div>
+      想玩手绘 SVG 换装版？<a href="./doll.html">点这里 →</a>
+    </footer>
+  </div>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
