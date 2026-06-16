@@ -29,6 +29,8 @@
             <rect x="154" y="300" width="18" height="110" rx="9" id="leg-r" class="skin" fill="#ffe0c2" />
             <!-- 鞋(由 JS 填充) -->
             <g id="shoes-layer"></g>
+            <!-- 内搭:短裤(始终穿着,由 JS 填充) -->
+            <g id="inner-bottom-layer"></g>
             <!-- 下装(由 JS 填充) -->
             <g id="bottom-layer"></g>
             <!-- 躯干 -->
@@ -36,6 +38,8 @@
             <!-- 手臂 -->
             <rect x="100" y="218" width="16" height="80" rx="8" class="skin" fill="#ffe0c2" />
             <rect x="184" y="218" width="16" height="80" rx="8" class="skin" fill="#ffe0c2" />
+            <!-- 内搭:吊带背心(始终穿着,由 JS 填充) -->
+            <g id="inner-top-layer"></g>
             <!-- 上装(由 JS 填充) -->
             <g id="top-layer"></g>
             <!-- 脖子 -->
@@ -48,33 +52,10 @@
               <!-- 耳朵 -->
               <ellipse cx="106" cy="156" rx="7" ry="11" class="skin" fill="#ffe0c2" />
               <ellipse cx="194" cy="156" rx="7" ry="11" class="skin" fill="#ffe0c2" />
-              <!-- 腮红 -->
-              <ellipse cx="125" cy="166" rx="9" ry="6" fill="#ffb3c6" opacity="0.5" />
-              <ellipse cx="175" cy="166" rx="9" ry="6" fill="#ffb3c6" opacity="0.5" />
-              <!-- 眉毛 -->
-              <path d="M124 133 Q133 128.5 143 132" stroke="#7a5a48" stroke-width="1.7" fill="none" stroke-linecap="round" id="brow-l" />
-              <path d="M157 132 Q167 128.5 176 133" stroke="#7a5a48" stroke-width="1.7" fill="none" stroke-linecap="round" id="brow-r" />
-              <!-- 眼睛(眼白+虹膜+高光+睫毛) -->
-              <g id="eyes">
-                <ellipse cx="133" cy="150" rx="9" ry="10" fill="#fff" />
-                <ellipse cx="167" cy="150" rx="9" ry="10" fill="#fff" />
-                <circle cx="134" cy="151" r="6.5" fill="#5a3a2a" id="iris-l" />
-                <circle cx="166" cy="151" r="6.5" fill="#5a3a2a" id="iris-r" />
-                <circle cx="134" cy="151" r="3" fill="#2a1a14" />
-                <circle cx="166" cy="151" r="3" fill="#2a1a14" />
-                <circle cx="136" cy="148" r="2" fill="#fff" />
-                <circle cx="168" cy="148" r="2" fill="#fff" />
-                <!-- 上睫毛 -->
-                <path d="M124 145 Q133 139 142 145" stroke="#2a1a14" stroke-width="2.4" fill="none" stroke-linecap="round" />
-                <path d="M158 145 Q167 139 176 145" stroke="#2a1a14" stroke-width="2.4" fill="none" stroke-linecap="round" />
-                <path d="M124 145 L121 142 M142 145 L145 142" stroke="#2a1a14" stroke-width="1.6" stroke-linecap="round" />
-                <path d="M158 145 L155 142 M176 145 L179 142" stroke="#2a1a14" stroke-width="1.6" stroke-linecap="round" />
-              </g>
               <!-- 鼻子 -->
-              <path d="M149 158 Q147 164 151 165" stroke="#e0a37a" stroke-width="1.6" fill="none" stroke-linecap="round" />
-              <!-- 嘴(微笑,带唇色) -->
-              <path d="M141 176 Q150 184 159 176 Q150 180 141 176 Z" fill="#e26d86" id="mouth" />
-              <path d="M141 176 Q150 182 159 176" stroke="#c44d68" stroke-width="1.4" fill="none" stroke-linecap="round" />
+              <path d="M149 158 Q147 164 151 165" stroke="#c79a86" stroke-width="1.5" fill="none" stroke-linecap="round" />
+              <!-- 表情(眉/眼/嘴/腮红 由 JS 填充,可切换) -->
+              <g id="face-layer"></g>
             </g>
             <!-- 头发(由 JS 填充) -->
             <g id="hair-layer"></g>
@@ -102,7 +83,12 @@
       </section>
     </main>
 
-    <footer class="footer">用 SVG 纯手工打造 · 直接在浏览器中游玩 💖</footer>
+    <footer class="footer">
+      <div class="charinfo">
+        🌸 <b>自定义</b> · 18岁 · 165cm · 温柔 / 文静 / 善良 · 热爱花草和阳光,偶尔有点小迷糊
+      </div>
+      用 SVG 纯手工打造 · 直接在浏览器中游玩 💖
+    </footer>
   </div>
 
   <script src="game.js"></script>

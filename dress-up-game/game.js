@@ -3,18 +3,19 @@
 
 // 当前造型状态
 const DEFAULT_OUTFIT = {
-  skin: '#ffe0c2',
+  skin: '#f8ddcb',
+  expression: 'smile',
   hair: 'longcenter',
-  hairColor: '#3a2620',
+  hairColor: '#2B211D',
   top: 'chiffon',
-  topColor: '#f6b8a6',
+  topColor: '#F2C9CC',
   bottom: 'none',
-  bottomColor: '#a86cff',
-  shoes: 'flats',
+  bottomColor: '#E49BA2',
+  shoes: 'none',
   shoesColor: '#f0d9c8',
   acc: 'none',
   acc2: 'none',
-  bg: 'garden',
+  bg: 'cream',
 };
 const outfit = JSON.parse(JSON.stringify(DEFAULT_OUTFIT));
 
@@ -22,6 +23,7 @@ const outfit = JSON.parse(JSON.stringify(DEFAULT_OUTFIT));
    每个素材含: name 与 draw(color) 返回 SVG 字符串。 */
 
 const SKIN = {
+  porcelain: { name: '瓷白', color: '#f8ddcb' },
   light: { name: '白皙', color: '#ffe0c2' },
   fair: { name: '自然', color: '#f6c9a0' },
   tan: { name: '小麦', color: '#d8a373' },
@@ -29,6 +31,78 @@ const SKIN = {
   rosy: { name: '红润', color: '#f7c4b0' },
   fantasy: { name: '梦幻紫', color: '#d9c0ff' },
 };
+
+/* ---- 表情系统(眉/眼/嘴/腮红),配色取自设定稿 ---- */
+const EYE_IRIS = '#5A4338';
+const EYE_PUPIL = '#2B211D';
+const BLUSH_C = '#E49BA2';
+const LIP_C = '#d97a8a';
+
+function brows(dy = 0) {
+  return `<path d="M123 ${133 + dy} Q133 ${128 + dy} 144 ${132 + dy}" stroke="#6b4a3a" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+          <path d="M156 ${132 + dy} Q167 ${128 + dy} 177 ${133 + dy}" stroke="#6b4a3a" stroke-width="1.7" fill="none" stroke-linecap="round"/>`;
+}
+function blush(op = 0.5) {
+  return `<ellipse cx="125" cy="167" rx="9" ry="6" fill="${BLUSH_C}" opacity="${op}"/>
+          <ellipse cx="175" cy="167" rx="9" ry="6" fill="${BLUSH_C}" opacity="${op}"/>`;
+}
+function blushStrong() {
+  return `<ellipse cx="123" cy="168" rx="12" ry="7.5" fill="${BLUSH_C}" opacity="0.7"/>
+          <ellipse cx="177" cy="168" rx="12" ry="7.5" fill="${BLUSH_C}" opacity="0.7"/>
+          <g stroke="#cf6f7e" stroke-width="1.1" opacity="0.75" stroke-linecap="round">
+            <line x1="118" y1="165" x2="118" y2="172"/><line x1="124" y1="164" x2="124" y2="173"/><line x1="130" y1="165" x2="130" y2="172"/>
+            <line x1="170" y1="165" x2="170" y2="172"/><line x1="176" y1="164" x2="176" y2="173"/><line x1="182" y1="165" x2="182" y2="172"/>
+          </g>`;
+}
+// 睁眼(大眼,带高光)
+function eyeOpen(cx) {
+  return `<ellipse cx="${cx}" cy="151" rx="9.5" ry="11.5" fill="#fff"/>
+          <ellipse cx="${cx}" cy="152" rx="7.5" ry="9.5" fill="${EYE_IRIS}"/>
+          <circle cx="${cx}" cy="153" r="4" fill="${EYE_PUPIL}"/>
+          <circle cx="${cx + 2.5}" cy="148" r="2.6" fill="#fff"/>
+          <circle cx="${cx - 2}" cy="156" r="1.3" fill="#fff" opacity="0.7"/>
+          <path d="M${cx - 10} 143 Q${cx} 137 ${cx + 10} 143" stroke="${EYE_PUPIL}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M${cx + 10} 143 L${cx + 13} 141" stroke="${EYE_PUPIL}" stroke-width="1.6" stroke-linecap="round"/>`;
+}
+// 惊讶大圆眼
+function eyeWide(cx) {
+  return `<ellipse cx="${cx}" cy="151" rx="9" ry="12.5" fill="#fff"/>
+          <circle cx="${cx}" cy="151" r="7" fill="${EYE_IRIS}"/>
+          <circle cx="${cx}" cy="151" r="3.6" fill="${EYE_PUPIL}"/>
+          <circle cx="${cx + 2.5}" cy="147" r="2.6" fill="#fff"/>
+          <path d="M${cx - 10} 141 Q${cx} 135 ${cx + 10} 141" stroke="${EYE_PUPIL}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`;
+}
+// 弯弯笑眼(闭)
+function eyeArc(cx) {
+  return `<path d="M${cx - 9} 152 Q${cx} 143 ${cx + 9} 152" stroke="${EYE_PUPIL}" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          <path d="M${cx - 9} 152 L${cx - 12} 150 M${cx + 9} 152 L${cx + 12} 150" stroke="${EYE_PUPIL}" stroke-width="1.5" stroke-linecap="round"/>`;
+}
+const mouthSmile = `<path d="M142 176 Q150 183 158 176 Q150 180 142 176 Z" fill="${LIP_C}"/>
+                    <path d="M142 176 Q150 181 158 176" stroke="#c44d68" stroke-width="1.3" fill="none" stroke-linecap="round"/>`;
+const mouthOpen = `<path d="M140 175 Q150 189 160 175 Q150 181 140 175 Z" fill="#c84d63"/>
+                   <path d="M145 178 Q150 182 155 178" stroke="#fff" stroke-width="2" fill="none"/>`;
+const mouthO = `<ellipse cx="150" cy="180" rx="4.5" ry="6" fill="#c84d63"/>
+                <ellipse cx="150" cy="179" rx="2.4" ry="3" fill="#8a2f3f"/>`;
+const mouthShy = `<path d="M144 178 Q150 182 156 178" stroke="#c44d68" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+
+const EXPRESSIONS = {
+  smile: { name: '微笑', draw: () => brows() + eyeOpen(133) + eyeOpen(167) + blush(0.5) + mouthSmile },
+  happy: { name: '开心', draw: () => brows(-2) + eyeArc(133) + eyeArc(167) + blush(0.6) + mouthOpen },
+  surprised: { name: '惊讶', draw: () => brows(-4) + eyeWide(133) + eyeWide(167) + blush(0.45) + mouthO },
+  shy: { name: '害羞', draw: () => brows(2) + eyeOpen(133) + eyeOpen(167) + blushStrong() + mouthShy },
+  wink: { name: '眨眼', draw: () => brows() + eyeArc(133) + eyeOpen(167) + blush(0.55) + mouthSmile },
+};
+
+/* ---- 内搭基础层(粉色吊带背心 + 短裤,始终穿着,贴合底图) ---- */
+const INNER_TOP = `
+  <path d="M132 213 L131 200" stroke="#F2C9CC" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M168 213 L169 200" stroke="#F2C9CC" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M123 214 Q150 226 177 214 L178 304 Q150 312 122 304 Z" fill="#F2C9CC"/>
+  <path d="M132 215 Q150 223 168 215" stroke="#E49BA2" stroke-width="1.4" fill="none" opacity="0.5"/>
+  <path d="M150 226 L150 304" stroke="#E49BA2" stroke-width="1" fill="none" opacity="0.22"/>`;
+const INNER_BOTTOM = `
+  <path d="M122 300 Q150 309 178 300 L176 340 L158 340 L150 324 L142 340 L124 340 Z" fill="#F2C9CC"/>
+  <path d="M124 304 Q150 312 176 304" stroke="#E49BA2" stroke-width="1.4" fill="none" opacity="0.5"/>`;
 
 const HAIR = {
   short: {
@@ -98,6 +172,7 @@ const HAIR = {
 };
 
 const TOP = {
+  none: { name: '不穿', draw: () => '' },
   tee: {
     name: 'T恤',
     draw: (c) => `
@@ -154,19 +229,25 @@ const TOP = {
       <rect x="142" y="232" width="16" height="14" fill="#ff5d8f"/>`,
   },
   chiffon: {
-    name: '雪纺长裙',
+    name: '雪纺吊带裙',
     draw: (c) => `
-      <!-- 飘逸长袖 -->
-      <path d="M118 210 Q92 240 86 300 Q100 296 106 270 Q112 300 110 320 Q120 280 124 236 Z" fill="${c}" opacity="0.92"/>
-      <path d="M182 210 Q208 240 214 300 Q200 296 194 270 Q188 300 190 320 Q180 280 176 236 Z" fill="${c}" opacity="0.92"/>
-      <!-- 裙身:深V领 + 收腰 + 多层飘逸下摆 -->
-      <path d="M128 204 Q150 214 172 204 L182 250 Q150 262 118 250 Z" fill="${c}"/>
-      <path d="M120 250 Q150 262 180 250 Q196 330 210 410 Q150 396 90 410 Q104 330 120 250 Z" fill="${c}"/>
-      <!-- 层叠褶皱高光 -->
-      <path d="M138 260 Q140 340 128 408" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.25"/>
-      <path d="M162 260 Q160 340 172 408" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.25"/>
-      <path d="M150 256 L150 408" stroke="#000" stroke-width="1.5" fill="none" opacity="0.06"/>
-      <path d="M96 405 Q150 392 204 405" stroke="#fff" stroke-width="3" fill="none" opacity="0.3"/>`,
+      <!-- 细吊带 -->
+      <path d="M131 207 L129 186" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M169 207 L171 186" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- 侧裙摆(高低裙:两侧及后摆较长) -->
+      <path d="M121 240 L101 408 Q116 386 132 352 Z" fill="${c}" opacity="0.95"/>
+      <path d="M179 240 L199 408 Q184 386 168 352 Z" fill="${c}" opacity="0.95"/>
+      <!-- 抹胸 V 领(收褶) -->
+      <path d="M126 205 Q150 217 174 205 L179 241 Q150 253 121 241 Z" fill="${c}"/>
+      <!-- 前短裙摆(手帕褶,露出小腿与赤脚) -->
+      <path d="M123 240 Q150 253 177 240 L172 350 L160 330 L150 356 L140 330 L128 350 Z" fill="${c}"/>
+      <!-- 胸前收褶 + 褶皱高光 -->
+      <path d="M140 220 L150 240 L160 220" stroke="#E49BA2" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <path d="M150 218 L150 352" stroke="#E49BA2" stroke-width="1.2" fill="none" opacity="0.4"/>
+      <path d="M137 246 Q132 320 126 352" stroke="#fff" stroke-width="2" fill="none" opacity="0.3"/>
+      <path d="M163 246 Q168 320 174 352" stroke="#fff" stroke-width="2" fill="none" opacity="0.3"/>
+      <path d="M108 400 Q120 384 130 360" stroke="#fff" stroke-width="2" fill="none" opacity="0.25"/>
+      <path d="M192 400 Q180 384 170 360" stroke="#fff" stroke-width="2" fill="none" opacity="0.25"/>`,
   },
 };
 
@@ -359,6 +440,7 @@ const ACC2 = {
 };
 
 const BG = {
+  cream: { name: '暖白', color: '#F7E9E6' },
   pink: { name: '粉色', color: '#fde7f3' },
   sky: { name: '天空', color: '#dff1ff' },
   mint: { name: '薄荷', color: '#dcf7ec' },
@@ -400,18 +482,22 @@ function gardenDecor() {
 }
 
 /* 调色板 */
-const PALETTE = ['#ff7eb3', '#ff5d8f', '#a86cff', '#6c8cff', '#43c6ac',
-  '#ffd54a', '#ff9f68', '#ffffff', '#3a3a4a', '#6b4a3a'];
-const HAIR_PALETTE = ['#6b4a3a', '#2b2b2b', '#c9913f', '#ff7eb3', '#a86cff',
-  '#7a4a2a', '#d94f4f', '#5a5a6a', '#43c6ac', '#ffffff'];
+const PALETTE = ['#F2C9CC', '#E49BA2', '#ff7eb3', '#ff5d8f', '#a86cff', '#6c8cff',
+  '#43c6ac', '#ffd54a', '#ff9f68', '#ffffff', '#8A6B5D', '#5A4338'];
+const HAIR_PALETTE = ['#2B211D', '#5A4338', '#8A6B5D', '#6b4a3a', '#c9913f',
+  '#ff7eb3', '#a86cff', '#d94f4f', '#5a5a6a', '#ffffff'];
 
 /* ---------- 渲染 ---------- */
 function render() {
   // 肤色
   document.querySelectorAll('#doll .skin').forEach(el => el.setAttribute('fill', outfit.skin));
+  // 表情
+  document.getElementById('face-layer').innerHTML = EXPRESSIONS[outfit.expression].draw();
 
   document.getElementById('bg-layer').setAttribute('fill', BG[outfit.bg].color);
   document.getElementById('hair-layer').innerHTML = HAIR[outfit.hair].draw(outfit.hairColor);
+  document.getElementById('inner-top-layer').innerHTML = INNER_TOP;
+  document.getElementById('inner-bottom-layer').innerHTML = INNER_BOTTOM;
   document.getElementById('top-layer').innerHTML = TOP[outfit.top].draw(outfit.topColor);
   document.getElementById('bottom-layer').innerHTML = BOTTOM[outfit.bottom].draw(outfit.bottomColor);
   document.getElementById('shoes-layer').innerHTML = SHOES[outfit.shoes].draw(outfit.shoesColor);
@@ -442,6 +528,7 @@ function render() {
 /* ---------- 面板配置 ---------- */
 const TABS = [
   { key: 'skin', label: '🧍 角色', type: 'swatch', data: SKIN },
+  { key: 'expression', label: '😊 表情', type: 'item', data: EXPRESSIONS, palette: null },
   { key: 'hair', label: '💇 发型', type: 'item', data: HAIR, colorKey: 'hairColor', palette: HAIR_PALETTE },
   { key: 'top', label: '👚 上装', type: 'item', data: TOP, colorKey: 'topColor', palette: PALETTE },
   { key: 'bottom', label: '👗 下装', type: 'item', data: BOTTOM, colorKey: 'bottomColor', palette: PALETTE },
@@ -493,6 +580,8 @@ function buildOptions() {
       let inner;
       if (k === 'none') {
         inner = '<text x="150" y="250" font-size="40" text-anchor="middle">🚫</text>';
+      } else if (tab.key === 'expression') {
+        inner = `<ellipse cx="150" cy="152" rx="45" ry="50" fill="${outfit.skin}"/>${v.draw()}`;
       } else if (tab.type === 'acc2') {
         inner = (v.behind || '') + (v.front || '');
       } else {
@@ -536,6 +625,7 @@ function randomColor(p) { return p[Math.floor(Math.random() * p.length)]; }
 
 document.getElementById('randomBtn').addEventListener('click', () => {
   outfit.skin = SKIN[randomKey(SKIN)].color;
+  outfit.expression = randomKey(EXPRESSIONS);
   outfit.hair = randomKey(HAIR);
   outfit.hairColor = randomColor(HAIR_PALETTE);
   outfit.top = randomKey(TOP);
