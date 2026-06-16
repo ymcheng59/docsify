@@ -4,17 +4,17 @@
 // 当前造型状态
 const DEFAULT_OUTFIT = {
   skin: '#ffe0c2',
-  hair: 'long',
-  hairColor: '#6b4a3a',
-  top: 'tee',
-  topColor: '#ff7eb3',
-  bottom: 'skirt',
+  hair: 'longcenter',
+  hairColor: '#3a2620',
+  top: 'chiffon',
+  topColor: '#f6b8a6',
+  bottom: 'none',
   bottomColor: '#a86cff',
-  shoes: 'sneaker',
-  shoesColor: '#ffffff',
+  shoes: 'flats',
+  shoesColor: '#f0d9c8',
   acc: 'none',
   acc2: 'none',
-  bg: 'pink',
+  bg: 'garden',
 };
 const outfit = JSON.parse(JSON.stringify(DEFAULT_OUTFIT));
 
@@ -43,6 +43,15 @@ const HAIR = {
     draw: (c) => `
       <path d="M100 150 Q96 92 150 86 Q204 92 200 150 Q210 260 184 280 Q196 200 182 150 Q150 122 118 150 Q104 200 116 280 Q90 260 100 150 Z" fill="${c}"/>
       <path d="M108 100 Q150 78 192 100 Q150 110 108 100 Z" fill="${c}" opacity="0.85"/>`,
+  },
+  longcenter: {
+    name: '中分黑长直',
+    draw: (c) => `
+      <path d="M99 152 Q95 96 120 82 Q150 70 180 82 Q205 96 201 152 Q214 300 188 330 Q200 230 184 156 Q150 132 148 96 Q146 132 116 156 Q100 230 112 330 Q86 300 99 152 Z" fill="${c}"/>
+      <path d="M148 96 Q150 90 152 96 L150 150 Z" fill="#000" opacity="0.18"/>
+      <path d="M118 110 Q150 88 182 110" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.18"/>
+      <path d="M104 200 Q108 260 116 320" stroke="#fff" stroke-width="3" fill="none" opacity="0.14"/>
+      <path d="M196 200 Q192 260 184 320" stroke="#fff" stroke-width="3" fill="none" opacity="0.14"/>`,
   },
   twin: {
     name: '双马尾',
@@ -143,6 +152,21 @@ const TOP = {
       <path d="M116 206 Q150 196 184 206 L196 240 L180 248 L180 312 L120 312 L120 248 L104 240 Z" fill="${c}"/>
       <path d="M132 202 L150 240 L168 202 Q150 212 132 202 Z" fill="#3a5a9a"/>
       <rect x="142" y="232" width="16" height="14" fill="#ff5d8f"/>`,
+  },
+  chiffon: {
+    name: '雪纺长裙',
+    draw: (c) => `
+      <!-- 飘逸长袖 -->
+      <path d="M118 210 Q92 240 86 300 Q100 296 106 270 Q112 300 110 320 Q120 280 124 236 Z" fill="${c}" opacity="0.92"/>
+      <path d="M182 210 Q208 240 214 300 Q200 296 194 270 Q188 300 190 320 Q180 280 176 236 Z" fill="${c}" opacity="0.92"/>
+      <!-- 裙身:深V领 + 收腰 + 多层飘逸下摆 -->
+      <path d="M128 204 Q150 214 172 204 L182 250 Q150 262 118 250 Z" fill="${c}"/>
+      <path d="M120 250 Q150 262 180 250 Q196 330 210 410 Q150 396 90 410 Q104 330 120 250 Z" fill="${c}"/>
+      <!-- 层叠褶皱高光 -->
+      <path d="M138 260 Q140 340 128 408" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.25"/>
+      <path d="M162 260 Q160 340 172 408" stroke="#fff" stroke-width="2.5" fill="none" opacity="0.25"/>
+      <path d="M150 256 L150 408" stroke="#000" stroke-width="1.5" fill="none" opacity="0.06"/>
+      <path d="M96 405 Q150 392 204 405" stroke="#fff" stroke-width="3" fill="none" opacity="0.3"/>`,
   },
 };
 
@@ -284,6 +308,18 @@ const ACC = {
       <circle cx="162" cy="96" r="7" fill="#a86cff"/>
       <circle cx="184" cy="106" r="7" fill="#43c6ac"/>`,
   },
+  bougainvillea: {
+    name: '三角梅发饰',
+    draw: () => `
+      <g transform="translate(186 118)">
+        <path d="M0 -10 L8 4 L-8 4 Z" fill="#ff5d8f"/>
+        <path d="M-10 6 L4 -3 L4 14 Z" fill="#ff7eb3"/>
+        <path d="M10 6 L-4 -3 L-4 14 Z" fill="#ff89b6"/>
+        <circle cx="0" cy="3" r="2.6" fill="#fff3a0"/>
+      </g>
+      <path d="M170 116 Q176 108 184 110" stroke="#5a9a4a" stroke-width="2.5" fill="none"/>
+      <path d="M168 112 Q172 106 178 108 Q172 112 168 112 Z" fill="#5a9a4a"/>`,
+  },
 };
 
 // 身体/背后配饰（独立图层，可与头部配饰叠加）
@@ -331,7 +367,37 @@ const BG = {
   star: { name: '星空', color: '#2b2350' },
   beach: { name: '沙滩', color: '#fde6b8' },
   forest: { name: '森林', color: '#cdeacb' },
+  garden: { name: '花园三角梅', color: '#e9f3e0' },
 };
+
+// 花园背景的装饰图层（绿叶 + 三角梅），叠在底色之上
+function gardenDecor() {
+  const leaf = (x, y, s, rot, op = 1) =>
+    `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" opacity="${op}">
+       <path d="M0 0 Q14 -10 28 0 Q14 10 0 0 Z" fill="#5a9a4a"/>
+       <path d="M2 0 L26 0" stroke="#3f7a34" stroke-width="1"/></g>`;
+  const flower = (x, y, s) =>
+    `<g transform="translate(${x} ${y}) scale(${s})">
+       <path d="M0 -9 L7 4 L-7 4 Z" fill="#ff5d8f"/>
+       <path d="M-9 6 L4 -3 L4 13 Z" fill="#ff7eb3"/>
+       <path d="M9 6 L-4 -3 L-4 13 Z" fill="#ff89b6"/>
+       <circle cx="0" cy="3" r="2.4" fill="#fff3a0"/></g>`;
+  // 顶部藤蔓垂下的绿叶与花
+  let top = '';
+  const leaves = [[20, 30, 1.0, 20], [60, 18, 1.2, -10], [110, 34, 1.0, 35],
+    [170, 16, 1.3, -25], [230, 30, 1.1, 15], [275, 20, 1.0, -35],
+    [40, 60, 0.9, 60], [200, 56, 0.9, -55], [255, 64, 1.0, 30]];
+  leaves.forEach(l => top += leaf(l[0], l[1], l[2], l[3]));
+  const flowers = [[50, 40, 1.1], [150, 30, 1.3], [240, 48, 1.1], [95, 58, 0.9], [285, 38, 1.0]];
+  flowers.forEach(f => top += flower(f[0], f[1], f[2]));
+  // 底部盆栽绿植
+  let bottom = '';
+  for (let i = 0; i < 7; i++) {
+    bottom += leaf(15 + i * 45, 430 + (i % 2) * 8, 1.4, -90 + (i % 3) * 25, 0.95);
+    bottom += leaf(30 + i * 45, 446, 1.2, -70 - (i % 3) * 20, 0.95);
+  }
+  return `<g id="garden-decor">${top}${bottom}</g>`;
+}
 
 /* 调色板 */
 const PALETTE = ['#ff7eb3', '#ff5d8f', '#a86cff', '#6c8cff', '#43c6ac',
@@ -354,9 +420,12 @@ function render() {
   // 身体配饰的前置部分追加到上装图层之上
   document.getElementById('acc-layer').innerHTML += ACC2[outfit.acc2].front;
 
-  // 星空背景加点星星
-  const oldStars = document.getElementById('stars');
-  if (oldStars) oldStars.remove();
+  // 背景装饰层（星空 / 花园），先清掉旧的
+  ['stars', 'garden-decor'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  });
+  const bgLayer = document.getElementById('bg-layer');
   if (outfit.bg === 'star') {
     const stars = Array.from({ length: 18 }, () => {
       const x = (Math.random() * 300).toFixed(0);
@@ -364,7 +433,9 @@ function render() {
       const r = (Math.random() * 1.6 + 0.6).toFixed(1);
       return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="0.85"/>`;
     }).join('');
-    document.getElementById('bg-layer').insertAdjacentHTML('afterend', `<g id="stars">${stars}</g>`);
+    bgLayer.insertAdjacentHTML('afterend', `<g id="stars">${stars}</g>`);
+  } else if (outfit.bg === 'garden') {
+    bgLayer.insertAdjacentHTML('afterend', gardenDecor());
   }
 }
 
