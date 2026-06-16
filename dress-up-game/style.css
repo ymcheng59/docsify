@@ -1,11 +1,11 @@
 :root {
-  --pink: #ff7eb3;
-  --pink-soft: #ffd6e8;
-  --purple: #a86cff;
-  --bg: #fff0f6;
+  --pink: #E49BA2;
+  --pink-soft: #F2C9CC;
+  --purple: #b58aa0;
+  --bg: #F7E9E6;
   --card: #ffffff;
-  --text: #5a3a4a;
-  --shadow: 0 8px 24px rgba(255, 126, 179, 0.25);
+  --text: #5A4338;
+  --shadow: 0 8px 24px rgba(228, 155, 162, 0.28);
 }
 
 * { box-sizing: border-box; }
@@ -13,7 +13,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  background: linear-gradient(160deg, #ffe3f1 0%, #ede1ff 100%);
+  background: linear-gradient(160deg, #F7E9E6 0%, #F6DDE0 100%);
   color: var(--text);
   min-height: 100vh;
 }
@@ -146,9 +146,21 @@ body {
 .footer {
   text-align: center;
   margin-top: 22px;
-  color: #b58aa5;
+  color: #a98a82;
   font-size: 0.85rem;
 }
+.charinfo {
+  display: inline-block;
+  background: var(--card);
+  border: 1.5px solid var(--pink-soft);
+  border-radius: 14px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-size: 0.84rem;
+  box-shadow: var(--shadow);
+}
+.charinfo b { color: var(--pink); }
 
 @media (max-width: 720px) {
   .stage-wrap { grid-template-columns: 1fr; }
