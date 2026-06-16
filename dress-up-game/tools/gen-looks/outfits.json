@@ -1,0 +1,15 @@
+{
+  "_说明": "每个 look 的 items 用 assets/items/items.json 里的 id。可自由增删/改名/调搭配。",
+  "looks": [
+    { "name": "碎花长裙",     "items": ["dress-1", "shoes-1", "hat-1"] },
+    { "name": "粉色娃娃裙",   "items": ["dress-2", "shoes-1", "bag-1"] },
+    { "name": "藏青纱裙",     "items": ["dress-3", "shoes-1"] },
+    { "name": "泡泡袖百褶裙", "items": ["top-1", "bottom-1", "shoes-1"] },
+    { "name": "蕾丝牛仔",     "items": ["top-2", "bottom-2", "shoes-1"] },
+    { "name": "吊带百褶帽",   "items": ["top-3", "bottom-1", "shoes-1", "hat-1"] },
+    { "name": "蕾丝泡袖牛仔", "items": ["top-4", "bottom-2", "shoes-1", "bag-1"] },
+    { "name": "鹅黄百褶",     "items": ["top-5", "bottom-1", "shoes-1"] },
+    { "name": "娃娃领牛仔",   "items": ["top-6", "bottom-2", "shoes-1"] },
+    { "name": "束腰胸衣百褶", "items": ["top-7", "bottom-1", "shoes-1"] }
+  ]
+}
