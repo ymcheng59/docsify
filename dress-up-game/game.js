@@ -93,6 +93,17 @@ const EXPRESSIONS = {
   wink: { name: '眨眼', draw: () => brows() + eyeArc(133) + eyeOpen(167) + blush(0.55) + mouthSmile },
 };
 
+/* ---- 内搭基础层(粉色吊带背心 + 短裤,始终穿着,贴合底图) ---- */
+const INNER_TOP = `
+  <path d="M132 213 L131 200" stroke="#F2C9CC" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M168 213 L169 200" stroke="#F2C9CC" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M123 214 Q150 226 177 214 L178 304 Q150 312 122 304 Z" fill="#F2C9CC"/>
+  <path d="M132 215 Q150 223 168 215" stroke="#E49BA2" stroke-width="1.4" fill="none" opacity="0.5"/>
+  <path d="M150 226 L150 304" stroke="#E49BA2" stroke-width="1" fill="none" opacity="0.22"/>`;
+const INNER_BOTTOM = `
+  <path d="M122 300 Q150 309 178 300 L176 340 L158 340 L150 324 L142 340 L124 340 Z" fill="#F2C9CC"/>
+  <path d="M124 304 Q150 312 176 304" stroke="#E49BA2" stroke-width="1.4" fill="none" opacity="0.5"/>`;
+
 const HAIR = {
   short: {
     name: '短发',
@@ -161,6 +172,7 @@ const HAIR = {
 };
 
 const TOP = {
+  none: { name: '不穿', draw: () => '' },
   tee: {
     name: 'T恤',
     draw: (c) => `
@@ -484,6 +496,8 @@ function render() {
 
   document.getElementById('bg-layer').setAttribute('fill', BG[outfit.bg].color);
   document.getElementById('hair-layer').innerHTML = HAIR[outfit.hair].draw(outfit.hairColor);
+  document.getElementById('inner-top-layer').innerHTML = INNER_TOP;
+  document.getElementById('inner-bottom-layer').innerHTML = INNER_BOTTOM;
   document.getElementById('top-layer').innerHTML = TOP[outfit.top].draw(outfit.topColor);
   document.getElementById('bottom-layer').innerHTML = BOTTOM[outfit.bottom].draw(outfit.bottomColor);
   document.getElementById('shoes-layer').innerHTML = SHOES[outfit.shoes].draw(outfit.shoesColor);
