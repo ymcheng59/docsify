@@ -1,0 +1,152 @@
+[
+  {
+    "id": "top-1",
+    "cat": "top",
+    "name": "粉色泡泡袖",
+    "file": "top-1.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-2",
+    "cat": "top",
+    "name": "米色蕾丝",
+    "file": "top-2.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-3",
+    "cat": "top",
+    "name": "粉色吊带",
+    "file": "top-3.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-4",
+    "cat": "top",
+    "name": "米色蕾丝泡袖",
+    "file": "top-4.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-5",
+    "cat": "top",
+    "name": "鹅黄蝴蝶结",
+    "file": "top-5.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-6",
+    "cat": "top",
+    "name": "白色娃娃领",
+    "file": "top-6.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "top-7",
+    "cat": "top",
+    "name": "棕色束腰胸衣",
+    "file": "top-7.png",
+    "x": 49.5,
+    "y": 33,
+    "w": 34,
+    "z": 20
+  },
+  {
+    "id": "dress-1",
+    "cat": "dress",
+    "name": "开衫碎花长裙",
+    "file": "dress-1.png",
+    "x": 49.5,
+    "y": 47,
+    "w": 44,
+    "z": 25
+  },
+  {
+    "id": "dress-2",
+    "cat": "dress",
+    "name": "粉色娃娃裙",
+    "file": "dress-2.png",
+    "x": 49.5,
+    "y": 47,
+    "w": 44,
+    "z": 25
+  },
+  {
+    "id": "dress-3",
+    "cat": "dress",
+    "name": "藏青纱裙",
+    "file": "dress-3.png",
+    "x": 49.5,
+    "y": 47,
+    "w": 44,
+    "z": 25
+  },
+  {
+    "id": "bottom-1",
+    "cat": "bottom",
+    "name": "米色百褶裙",
+    "file": "bottom-1.png",
+    "x": 49.5,
+    "y": 57,
+    "w": 33,
+    "z": 10
+  },
+  {
+    "id": "bottom-2",
+    "cat": "bottom",
+    "name": "蓝牛仔短裙",
+    "file": "bottom-2.png",
+    "x": 49.5,
+    "y": 57,
+    "w": 33,
+    "z": 10
+  },
+  {
+    "id": "shoes-1",
+    "cat": "shoes",
+    "name": "粉色平底鞋",
+    "file": "shoes-1.png",
+    "x": 49.5,
+    "y": 92,
+    "w": 20,
+    "z": 5
+  },
+  {
+    "id": "bag-1",
+    "cat": "bag",
+    "name": "蝴蝶结手提包",
+    "file": "bag-1.png",
+    "x": 71,
+    "y": 66,
+    "w": 18,
+    "z": 30
+  },
+  {
+    "id": "hat-1",
+    "cat": "hat",
+    "name": "草帽",
+    "file": "hat-1.png",
+    "x": 49.5,
+    "y": 7,
+    "w": 30,
+    "z": 35
+  }
+]

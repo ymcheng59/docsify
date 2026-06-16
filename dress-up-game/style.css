@@ -162,6 +162,47 @@ body {
 }
 .charinfo b { color: var(--pink); }
 
+/* ===== 叠加换装版 ===== */
+.mix-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+.doll-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1024 / 1536;
+  max-height: 74vh;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.doll-canvas .base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.doll-canvas .layer {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: none;
+}
+.none-box {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 0.8rem;
+  color: #b08a82;
+}
+.swatch img { width: 100%; height: 64px; object-fit: contain; }
+
 /* ===== 造型相册版 ===== */
 .gallery-stage {
   position: relative;

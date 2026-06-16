@@ -2,14 +2,22 @@
 
 一个纯前端的换装小游戏，**无需任何依赖或构建工具**，直接用浏览器打开 `index.html` 即可游玩。
 
-包含两种模式：
+包含三种模式：
 
 | 模式 | 入口 | 说明 |
 | --- | --- | --- |
-| **造型相册版（默认）** | `index.html` | 用你自己的整身立绘图片当角色，点击切换不同造型 |
-| **手绘 SVG 换装版** | `doll.html` | 纯 SVG 小人，自由搭配发型/服装/配饰/表情/背景 |
+| **叠加换装版（默认）** | `index.html` | 用你的立绘底图 + 单品图层,按部位(上装/连衣裙/下装/鞋/包/帽)自由叠加搭配 |
+| **造型相册版** | `gallery.html` | 用整身立绘图片当角色,点击切换不同整套造型 |
+| **手绘 SVG 换装版** | `doll.html` | 纯 SVG 小人,自由搭配发型/服装/配饰/表情/背景 |
 
-## 造型相册版（用你自己的图）
+## 叠加换装版（默认）
+
+- 底图：`assets/初始造型.png`
+- 单品：`assets/items/*.png` + `assets/items/items.json`（每件含类别、名字、位置 `x/y/w` 与层级 `z`，均为画布百分比）
+- 单品由整张 `assets/衣服.png` 自动分割而来（透明背景，连通域识别）。
+- 想加新衣服：把单品加进 `assets/items/`，并在 `items.json` 补一条记录（位置可让我帮你校准）。
+
+## 造型相册版（gallery.html，用你自己的整身图）
 
 1. 把整身立绘图片放进 `assets/` 目录：
    - 默认形象：`base.png`
@@ -66,11 +74,17 @@ python3 -m http.server 8000
 
 ```
 dress-up-game/
-├── index.html    # 造型相册版页面
-├── gallery.js    # 相册版逻辑(读取 assets/ 图片)
+├── index.html    # 叠加换装版页面(默认)
+├── mix.js        # 叠加换装逻辑(底图 + assets/items 图层)
+├── gallery.html  # 造型相册版页面
+├── gallery.js    # 相册版逻辑(读取 assets/ 整身图片)
 ├── doll.html     # 手绘 SVG 换装版页面
 ├── game.js       # SVG 版素材与逻辑
 ├── style.css     # 共用样式
-├── assets/       # 放你的立绘图片(base.png / look-*.png / looks.json)
+├── assets/
+│   ├── 初始造型.png   # 叠加版底图
+│   ├── 衣服.png       # 衣服总图(分割来源)
+│   ├── items/         # 分割好的单品 + items.json
+│   └── looks.json     # 相册版造型清单
 └── README.md
 ```
