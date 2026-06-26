@@ -1,3 +1,42 @@
 [
-  { "file": "初始造型.png", "name": "初始造型" }
+  {
+    "file": "look-1.png",
+    "name": "粉色泡泡袖+牛仔短裤"
+  },
+  {
+    "file": "look-2.png",
+    "name": "白T+粉格百褶裙"
+  },
+  {
+    "file": "look-3.png",
+    "name": "蓝吊带+蛋糕短裙"
+  },
+  {
+    "file": "look-4.png",
+    "name": "粉吊带+米色百褶裙"
+  },
+  {
+    "file": "look-5.png",
+    "name": "系带上衣+牛仔阔腿裤"
+  },
+  {
+    "file": "look-6.png",
+    "name": "开衫+粉碎花长裙"
+  },
+  {
+    "file": "look-7.png",
+    "name": "白色吊带连衣裙"
+  },
+  {
+    "file": "look-8.png",
+    "name": "藏青纱裙"
+  },
+  {
+    "file": "look-9.png",
+    "name": "棕色束腰长裙"
+  },
+  {
+    "file": "look-10.png",
+    "name": "蝴蝶结上衣+牛仔短裙"
+  }
 ]
